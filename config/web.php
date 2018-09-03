@@ -1,6 +1,6 @@
 <?php
 
 return [
-   // 'id' => 'safronov',
+    'id' => 'safronov',
     'basePath' => realpath(__DIR__.'/../')
 ];
