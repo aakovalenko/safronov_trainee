@@ -8,7 +8,7 @@ class SiteController extends Controller
 {
     public function actionIndex()
     {
-        return 'Safronov';
+        return $this->render('index');
     }
 }
 
