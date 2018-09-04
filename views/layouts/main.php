@@ -1,3 +1,6 @@
+<?php
+use yii\bootstrap\NavBar;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,6 +11,18 @@
     <title>Safronov</title>
 </head>
 <body>
+<?php
+
+
+NavBar::begin([
+        'brandLabel' => 'Safronov',
+    'brandUrl' => Yii::$app->homeUrl,
+    'options' => [
+            'class' => 'navbar-default navbar-fixed-top'
+    ]
+]);
+NavBar::end();
+?>
 <?= $content ?>
 </body>
 </html>
