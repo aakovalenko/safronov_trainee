@@ -13,7 +13,8 @@ return [
         ],
         'request' => [
             'cookieValidationKey' => 'super secret code'
-        ]
+        ],
+
     ],
     'modules' => [
         'debug' => 'yii\debug\Module'
