@@ -13,9 +13,11 @@ class UserRecord extends ActiveRecord
 
     public function setTestUser()
     {
-        $this->name = "John";
-        $this->email = "john@john.john";
-        $this->passhash = "SHA512 HASH HASH HASH";
-        $this->status = 2;
+        $faker = \Faker\Factory::create();
+
+        $this->name = $faker->name;
+        $this->email = $faker->email;
+        $this->passhash = $faker->password;
+        $this->status = $faker->randomDigit;
     }
 }
