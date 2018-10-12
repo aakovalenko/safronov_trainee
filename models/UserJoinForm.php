@@ -24,4 +24,11 @@ class UserJoinForm extends Model
 
         ];
     }
+
+    public function setUserRecord ($userRecord)
+    {
+        $this->name = $userRecord->user;
+        $this->email = $userRecord->email;
+        $this->password = $this->password2 = 'qvas';
+    }
 }
