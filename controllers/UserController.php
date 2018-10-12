@@ -36,7 +36,10 @@ class UserController extends Controller
     public function actionJoinPost()
     {
         $userJoinForm = new UserJoinForm();
-        $userJoinForm->load(Yii::$app->request->post());
+        if ($userJoinForm->load(Yii::$app->request->post()));
+        if ($userJoinForm->validate())
+            $userJoinForm->name = "ok";
+
         //$userJoinForm->name .= ".";
         return $this->render('join',['userJoinForm' => $userJoinForm]); //compact('userJoinForm')
     }
