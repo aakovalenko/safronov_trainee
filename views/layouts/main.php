@@ -27,23 +27,24 @@ NavBar::begin([
             'class' => 'navbar-default navbar-fixed-top'
     ]
 ]);
-
-$menu = [
-['label' => 'Join','url' => ['/user/join']],
+    if (Yii::$app->user->isGuest)
+    $menu = [
+    ['label' => 'Join','url' => ['/user/join']],
     ['label' => 'Login', 'url' => ['/user/login']]
 ];
+    else
+        $menu = [
+            ['label' => Yii::$app->user->getIdentity()->name],
+            ['label' => 'Logout', 'url' => ['/user/logout']]
+        ];
+
 echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => $menu
-]);
-NavBar::end();
+    ]);
+Navbar::end();
 ?>
 
-<div class="container" style="margin-top: 60px;">
+<div class="container" style="...">
 <?= $content ?>
 </div>
-
-<?php $this->endBody(); ?>
-</body>
-</html>
-<?php $this->endPage(); ?>
