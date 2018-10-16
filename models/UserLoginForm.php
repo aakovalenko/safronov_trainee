@@ -9,6 +9,7 @@ class UserLoginForm extends Model
 {
     public $email;
     public $password;
+    private $userRecord;
 
     public function rules()
     {
@@ -31,28 +32,30 @@ class UserLoginForm extends Model
         ];
     }
 
+    public function errorIfEmailNotFound()
+    {
+        $this->userRecord = UserRecord::findUserByEmail($this->email);
+        if ($this->userRecord->email == null)
+            $this->addError('email','This email does not registered');
+    }
+
     public function errorIfPasswordWrong()
     {
         if ($this->hasErrors())
             return;
-        $userRecord = UserRecord::findUserByEmail($this->email);
-        if ($userRecord->passhash != $this->password);
+
+        if ($this->userRecord->passhash != $this->password);
         $this->addError('password','Wrong password');
     }
 
-    public function errorIfEmailNotFound()
-    {
-        $userRecord = UserRecord::findUserByEmail($this->email);
-        if ($userRecord->email != $this->email)
-            $this->addError('email','This email does not registered');
-    }
+
 
     public function login()
     {
         if ($this->hasErrors())
             return;
-        $userRecord = UserRecord::findUserByEmail($this->email);
-        $userIdentity = \UserIdentity::findIdentity($userRecord->id);
+
+        $userIdentity = \UserIdentity::findIdentity($this->userRecord->id);
         Yii::$app->user->login($userIdentity);
     }
 }
