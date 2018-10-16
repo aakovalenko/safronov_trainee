@@ -3,6 +3,7 @@
 namespace  app\models;
 
 use yii\db\ActiveRecord;
+use yii;
 
 class UserRecord extends ActiveRecord
 {
@@ -42,6 +43,11 @@ class UserRecord extends ActiveRecord
 
     public function setPassword($password)
     {
-        $this->passhash = $password;
+        $this->passhash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->passhash);
     }
 }
