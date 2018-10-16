@@ -21,6 +21,7 @@ class UserJoinForm extends Model
             ['email','email', 'message'=>'Адрес почты указан неверно'],
             ['password','string','min'=>4],
             ['password2', 'compare','compareAttribute' => 'password'],
+            ['name','errorIfMagic'],
             ['email','errorIfEmailUsed']
 
         ];
@@ -33,10 +34,18 @@ class UserJoinForm extends Model
         $this->password = $this->password2 = 'qvas';
     }
 
+    public function errorIfMagic()
+    {
+        if ($this->name == 'Magic')
+            $this->addError('name','No magic please!');
+    }
+
     public function errorIfEmailUsed()
     {
-        if (UserRecord::existsEmail($this->email))
+        if ($this->hasErrors())
             return;
+        if (UserRecord::existsEmail($this->email))
+
         $this->addError('email','This e-mail already exists');
     }
 }
