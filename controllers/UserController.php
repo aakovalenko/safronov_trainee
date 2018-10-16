@@ -58,6 +58,7 @@ class UserController extends Controller
     {
         if (Yii::$app->request->isPost)
             return $this->actionLoginPost();
+
         $userLoginForm = new UserLoginForm();
 
         return $this->render('login',compact('userLoginForm'));
