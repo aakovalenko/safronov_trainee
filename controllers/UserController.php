@@ -33,12 +33,20 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * @return string
+     */
     public function actionJoinPost()
     {
         $userJoinForm = new UserJoinForm();
         if ($userJoinForm->load(Yii::$app->request->post()));
         if ($userJoinForm->validate())
-            $userJoinForm->name = "ok";
+        {
+            $userRecord = new UserRecord();
+            $userRecord->setUserJoinForm($userJoinForm);
+            $userRecord->save();
+            return $this->redirect('/user/login');
+        }
 
         //$userJoinForm->name .= ".";
         return $this->render('join',['userJoinForm' => $userJoinForm]); //compact('userJoinForm')
